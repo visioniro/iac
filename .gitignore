@@ -1,4 +1,4 @@
 .DS_Store
 .vagrant/
 *.pyc
-*.json
+IaC/images/webhook-api/src/webhook.json
