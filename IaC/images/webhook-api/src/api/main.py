@@ -7,31 +7,33 @@ import uvicorn
 from os import getenv
 app = FastAPI()
 
-secret = getenv('GITHUB_WEBHOOK_SECRET')
+WEBHOOK_SECRET = getenv('GITHUB_WEBHOOK_SECRET')
 
 def verify_signature(body, signature):
     # GitHub provides the signature in the form of 'sha256=xxxx'
     expected_signature = hmac.new(
-        secret.encode(), body, hashlib.sha256
+        WEBHOOK_SECRET.encode(), body, hashlib.sha256
     ).hexdigest()
 
     # Compare the signatures in a secure way to prevent timing attacks
     if not hmac.compare_digest(f'sha256={expected_signature}', signature):
         raise HTTPException(status_code=400, detail='Invalid signature')
 
+
 @app.post("/webhook")
 async def github_webhook(request: Request, x_hub_signature_256: Optional[str] = Header(None)):
     # Read the raw body of the HTTP request
     headers = request.headers
     print(headers)
-    body = await request.json()
+    content = await request.json()
+    body = await request.body()
 
     if x_hub_signature_256:
         verify_signature(str(body), x_hub_signature_256)
     else:
         raise HTTPException(status_code=400, detail='Missing X-Hub-Signature-256 header')
     with open('webhook.json', 'a+') as f:
-        dump(body, f, indent=4)
+        dump(content, f, indent=4)
     # Optional: Convert the body to a string if you want to see it in the logs
     # body_str = body.decode('utf-8')
     print("Webhook event received")
