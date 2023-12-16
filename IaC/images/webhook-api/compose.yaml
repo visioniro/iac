@@ -1,0 +1,13 @@
+services:
+  py-app:
+    image: my_py
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./src:/my_py
+    ports:
+      - "8000:8000"
+
+volumes:
+  src:

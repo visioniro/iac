@@ -1,0 +1,8 @@
+name: "Test workflow"
+
+run-name: by @${{ github.actor }}
+
+on:
+  push:
+    branches:
+      - master
