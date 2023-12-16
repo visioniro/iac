@@ -11,7 +11,7 @@ secret = getenv('GITHUB_WEBHOOK_SECRET')
 def verify_signature(body, signature):
     # GitHub provides the signature in the form of 'sha256=xxxx'
     expected_signature = hmac.new(
-        WEBHOOK_SECRET.encode(), body, hashlib.sha256
+        secret.encode(), body, hashlib.sha256
     ).hexdigest()
 
     # Compare the signatures in a secure way to prevent timing attacks
