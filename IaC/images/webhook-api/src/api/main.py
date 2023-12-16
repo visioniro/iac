@@ -9,10 +9,10 @@ app = FastAPI()
 
 secret = getenv('GITHUB_WEBHOOK_SECRET')
 
-def verify_signature(body, signature):
+def verify_signature(secret, signature):
     # GitHub provides the signature in the form of 'sha256=xxxx'
     expected_signature = hmac.new(
-        secret.encode(), body, hashlib.sha256
+        secret.encode(), secret, hashlib.sha256
     ).hexdigest()
 
     # Compare the signatures in a secure way to prevent timing attacks
@@ -27,7 +27,7 @@ async def github_webhook(request: Request, x_hub_signature_256: Optional[str] = 
     body = await request.json()
 
     if x_hub_signature_256:
-        verify_signature(body, x_hub_signature_256)
+        verify_signature(secret, x_hub_signature_256)
     else:
         raise HTTPException(status_code=400, detail='Missing X-Hub-Signature-256 header')
     with open('webhook.json', 'a+') as f:
