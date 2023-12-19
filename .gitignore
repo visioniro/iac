@@ -2,3 +2,4 @@
 .vagrant/
 *.pyc
 *.json
+IaC/images/my_mymsql/data

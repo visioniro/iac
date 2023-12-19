@@ -1,13 +1,13 @@
 services:
   py-app:
-    image: visionir/my_py
+    image: visionir/my_mysql
     build:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ./src:/my_py
+      - ./data:/var/lib/mysql
     ports:
-      - "8000:8000"
+      - "3306:3306"
 
 volumes:
-  src:
+  data:
