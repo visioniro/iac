@@ -3,11 +3,11 @@ services:
     image: visionir/my_mysql
     build:
       context: .
-      dockerfile: Dockerfile
     volumes:
-      - ./data:/var/lib/mysql
+      - mysql_data:/var/lib/mysql
     ports:
       - "3306:3306"
 
 volumes:
-  data:
+  mysql_data:
+    driver: local

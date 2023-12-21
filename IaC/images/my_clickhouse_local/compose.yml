@@ -1,0 +1,12 @@
+services:
+  clickhouse:
+    image: visionir/my_ch
+    build:
+      context: .
+    volumes:
+      - ./data:/data
+    ports:
+      - "9999:9999"
+
+volumes:
+  data:

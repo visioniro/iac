@@ -1,13 +1,15 @@
 services:
-  py-app:
-    image: visionir/my_py
+  webhook-api:
+    image: visionir/webhook-api:runtime
     build:
       context: .
-      dockerfile: Dockerfile
     volumes:
-      - ./src:/my_py
+      - webhooks:/webhooks/data
     ports:
       - "8000:8000"
+    env_file:
+      - .env
 
 volumes:
-  src:
+  webhooks:
+    driver: local

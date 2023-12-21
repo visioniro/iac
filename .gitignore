@@ -1,5 +1,3 @@
 .DS_Store
 .vagrant/
 *.pyc
-*.json
-IaC/images/my_mymsql/data
