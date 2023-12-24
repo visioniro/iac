@@ -7,7 +7,7 @@ import uvicorn
 from os import getenv
 app = FastAPI()
 
-WEBHOOK_SECRET = getenv('GITHUB_WEBHOOK_SECRET')
+WEBHOOK_SECRET = getenv('WEBHOOK_SECRET')
 
 def verify_signature(body, signature):
     # GitHub provides the signature in the form of 'sha256=xxxx'
