@@ -1,0 +1,28 @@
+services:
+  smee:
+    image: visionir/smee:smee-api
+    build:
+      context: .
+      args:
+        GH_OWNER: ${GH_OWNER}
+        GH_REPO: ${GH_REPO}
+        GH_TOKEN: ${GH_TOKEN}
+        API_URL: ${API_URL}
+        WEBHOOK_SECRET: ${WEBHOOK_SECRET}
+    ports:
+      - "7750:7750"
+    env_file:
+      - .env
+
+  api:
+    image: visionir/webhook-api:sleep
+    volumes:
+      - webhooks:/webhooks/data
+    ports:
+      - "8000:8000"
+    env_file:
+      - ../webhook-api/.env
+
+volumes:
+  webhooks:
+    driver: local
