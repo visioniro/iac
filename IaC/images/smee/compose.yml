@@ -16,6 +16,8 @@ services:
 
   api:
     image: visionir/webhook-api:sleep
+    build:
+      context: ../webhook-api
     volumes:
       - webhooks:/webhooks/data
     ports:
