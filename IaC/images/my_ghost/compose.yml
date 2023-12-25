@@ -1,0 +1,32 @@
+services:
+  ghost:
+    image: ghost:latest
+    restart: always
+    ports:
+      - 2368:2368
+    environment:
+      database__client: mysql
+      database__connection__host: db
+      database__connection__user: root
+      database__connection__password: password
+      database__connection__database: ghost
+    volumes:
+      - ./ghost:/var/lib/ghost/content
+    depends_on:
+      - db
+    networks:
+      - ghost
+
+  db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - ./db:/var/lib/mysql
+    networks:
+      - ghost
+
+networks:
+  ghost:
+    driver: bridge
