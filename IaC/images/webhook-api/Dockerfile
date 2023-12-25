@@ -1,6 +1,7 @@
 FROM python:alpine3.18
 
 ENV PYTHONPATH=/webhooks
+
 COPY src /webhooks
 
 WORKDIR /webhooks
