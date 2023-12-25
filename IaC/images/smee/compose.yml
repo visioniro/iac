@@ -19,7 +19,7 @@ services:
     build:
       context: ../webhook-api
     volumes:
-      - webhooks:/webhooks/data
+      - webhooks:/webhooks
     ports:
       - "8000:8000"
     env_file:
