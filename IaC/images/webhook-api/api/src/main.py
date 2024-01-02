@@ -34,10 +34,11 @@ async def github_webhook(request: Request, x_hub_signature_256: Optional[str] = 
         try:
             data = load(f)
             print()
-        except decoder.JSONDecodeError:
+        except decoder.JSONDecodeError as e:
             data = []
             data.append(content)
             dump(data, f)
+            raise e
     # Optional: Convert the body to a string if you want to see it in the logs
     # body_str = body.decode('utf-8')
     print("Webhook event received")
