@@ -2,7 +2,7 @@ from fastapi import FastAPI, Request, HTTPException, Header
 from typing import Optional
 import hmac
 import hashlib
-from json import dump, load
+from json import dump, load, decoder
 import uvicorn
 from os import getenv
 app = FastAPI()
@@ -31,8 +31,13 @@ async def github_webhook(request: Request, x_hub_signature_256: Optional[str] = 
     else:
         raise HTTPException(status_code=400, detail='Missing X-Hub-Signature-256 header')
     with open('/data/webhook.json', 'a+') as f:
-        data = load(f)
-        print()
+        try:
+            data = load(f)
+            print()
+        except decoder.JSONDecodeError:
+            data = []
+            data.append(content)
+            dump(data, f)
     # Optional: Convert the body to a string if you want to see it in the logs
     # body_str = body.decode('utf-8')
     print("Webhook event received")
