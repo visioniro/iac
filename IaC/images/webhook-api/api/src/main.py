@@ -30,7 +30,7 @@ async def github_webhook(request: Request, x_hub_signature_256: Optional[str] = 
         verify_signature(body, x_hub_signature_256)
     else:
         raise HTTPException(status_code=400, detail='Missing X-Hub-Signature-256 header')
-    with open('/data/webhook.json', 'w+') as f:
+    with open('/data/webhook.json', 'a+') as f:
         try:
             data = load(f)
             print()
