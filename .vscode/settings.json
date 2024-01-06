@@ -1,3 +1,27 @@
 {
-    "python.analysis.autoImportCompletions": true,
-}   
+  "python.analysis.autoImportCompletions": true,
+  "python.analysis.importFormat": "relative",
+  "python.languageServer": "Pylance",
+  "editor.indentSize": "tabSize",
+  "[python]": {
+    "diffEditor.ignoreTrimWhitespace": false,
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.formatOnSave": true,
+    "editor.tabSize": 4,
+    "github.copilot.editor.enableAutoCompletions": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit",
+      "source.fixAll": "always"
+    }
+  },
+  "json.format.enable": true,
+  "[json]": {
+    "editor.tabSize": 4,
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "yaml.completion": true,
+  "yaml.format.enable": true,
+  "yaml.validate": true,
+"[yaml]": {
+  "editor.tabSize": 2,
+}}  
