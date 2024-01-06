@@ -1,5 +1,5 @@
-name: build-image
-run-name: Build new image
+name: build-image-webhooks-api:api
+run-name: Build new image for Webhooks API:api
 on:
   push:
     paths:
