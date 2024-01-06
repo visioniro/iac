@@ -3,7 +3,7 @@ run-name: Build new image
 on:
   push:
     paths:
-      - "IaC/**"
+      - "IaC/images/webhook-api/api/src/**"
     branches:
       - master
 jobs:
@@ -26,3 +26,8 @@ jobs:
           install: true
       - name: Build and push
         uses: docker/build-push-action@v5
+        with:
+          context: ./IaC/images/webhook-api/api
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/webhook-api:
+
