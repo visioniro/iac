@@ -7,14 +7,16 @@ on:
         type: string
         description: "Name of the image to build"
         required: true
+    secrets:
+      DOCKERHUB_USERNAME:
+        description: "Dockerhub username"
+      DOCKERHUB_TOKEN:
+        description: "Dockerhub token"
 jobs:
   handle-docker-image:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          sparse-checkout: |
-            ${{inputs.IMAGE_NAME}}/
       - name: Generate Date
         id: date
         run: echo "TAG_DATE=$(date +'%Y-%m-%d')" >> "$GITHUB_OUTPUT"
@@ -25,7 +27,7 @@ jobs:
         id: login-docker-hub
         uses: docker/login-action@v3
         with:
-          username: ${{ vars.DOCKERHUB_USERNAME }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Use Docker Buildx
         id: buildx
@@ -39,6 +41,6 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v5
         with:
-          context: ./${{inputs.IMAGE_NAME}}
+          context: .
           push: true
-          tags: ${{ vars.DOCKERHUB_USERNAME }}/${{inputs.IMAGE_NAME}}:${{ steps.date.outputs.TAG_DATE }}.${{ github.run_number }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{inputs.IMAGE_NAME}}:${{ steps.date.outputs.TAG_DATE }}.${{ github.run_number }}
