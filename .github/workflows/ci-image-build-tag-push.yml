@@ -7,6 +7,11 @@ on:
         type: string
         description: "Name of the image to build"
         required: true
+    secrets:
+      DOCKERHUB_USERNAME:
+        description: "Docker Hub username"
+      DOCKERHUB_TOKEN:
+        description: "Docker Hub token"
 jobs:
   handle-docker-image:
     runs-on: ubuntu-latest
