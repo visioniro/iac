@@ -1,3 +1,0 @@
-[submodule "IaC/images/webhooks-handler/api"]
-	path = IaC/images/webhooks-handler/api
-	url = https://github.com/visioniro/webhook-api.git
