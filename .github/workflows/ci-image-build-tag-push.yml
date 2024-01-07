@@ -2,17 +2,17 @@ name: build-tag-push
 run-name: Build, Tag and Push new image for submodule
 on:
   workflow_call:
+    secrets:
+      docker_user:
+        description: "Docker Hub username"
+        required: true
+      docker_token:
+        description: "Docker Hub token"
+        required: true
     inputs:
       IMAGE_NAME:
         type: string
         description: "Name of the image to build"
-        required: true
-    secrets:
-      DOCKERHUB_USERNAME:
-        description: "Docker Hub username"
-        required: true
-      DOCKERHUB_TOKEN:
-        description: "Docker Hub token"
         required: true
 jobs:
   handle-docker-image:
