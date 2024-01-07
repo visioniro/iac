@@ -9,9 +9,9 @@ on:
         required: true
     secrets:
       DOCKERHUB_USERNAME:
-        description: "Docker Hub username"
+        required: true
       DOCKERHUB_TOKEN:
-        description: "Docker Hub token"
+        required: true
 jobs:
   handle-docker-image:
     runs-on: ubuntu-latest
