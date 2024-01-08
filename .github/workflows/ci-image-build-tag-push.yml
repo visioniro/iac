@@ -18,10 +18,15 @@ jobs:
   handle-docker-image:
     runs-on: ubuntu-latest
     steps:
+      - name: Validate workspace
+        id: validate-workspace
+        run: |
+          echo $GITHUB_WORKSPACE
       - uses: actions/checkout@v4
         with:
           sparse-checkout: .
           path: .
+          set-safe-directory: false
       - name: Generate Date
         id: date
         run: echo "TAG_DATE=$(date +'%Y-%m-%d')" >> "$GITHUB_OUTPUT"
