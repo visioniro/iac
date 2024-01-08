@@ -1,0 +1,9 @@
+name: web
+active: true
+events: 
+  - "*"
+config:
+  url: ${SMEE_URL}
+  content_type: application/vnd.github+json
+  secret: ${WEBHOOK_SECRET}
+  
