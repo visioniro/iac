@@ -8,5 +8,5 @@ logs/
 ghost/
 .env*
 .wakatime-project
-IaC/images/webhook-api/api/data
 backup/
+IaC/images/webhooks-handler
