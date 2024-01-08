@@ -21,6 +21,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           sparse-checkout: .
+          path: .
       - name: Generate Date
         id: date
         run: echo "TAG_DATE=$(date +'%Y-%m-%d')" >> "$GITHUB_OUTPUT"
