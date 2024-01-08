@@ -9,4 +9,3 @@ ghost/
 .env*
 .wakatime-project
 backup/
-IaC/images/webhooks-handler
