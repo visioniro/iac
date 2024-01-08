@@ -19,6 +19,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          sparse-checkout: .
       - name: Generate Date
         id: date
         run: echo "TAG_DATE=$(date +'%Y-%m-%d')" >> "$GITHUB_OUTPUT"
@@ -39,6 +41,10 @@ jobs:
             image=moby/buildkit:master
             network=host
           install: true
+      - name: Valdiate path
+        id: validate-path
+        run: |
+          echo $(pwd)
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v5
